@@ -1,0 +1,82 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+
+        //scan in system inputs for variables
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        ArrayList<Integer> itemsOFn = new ArrayList<Integer>();
+        while(scan.hasNext()){
+            itemsOFn.add(scan.nextInt());
+        }
+        scan.close();
+
+        //sort array
+        Collections.sort(itemsOFn);
+
+        //middle index of whole integer set
+        int midpoint = 0;
+        int upper = 0;
+        int lower = 0;
+        if(n % 2 == 0){
+            int temp = (n/2);
+            upper = temp;
+            lower = temp-1;
+        }
+        else{
+            midpoint = (((n - 1)/2));
+        }
+
+        //split data between lower and upper
+        ArrayList<Integer> lowerItemsOFn = new ArrayList<Integer>();
+        ArrayList<Integer> upperItemsOFn = new ArrayList<Integer>();
+        if(n % 2 == 0){
+            for(int i = 0; i < itemsOFn.size(); i++){
+                if(i <= lower){
+                    lowerItemsOFn.add(itemsOFn.get(i));
+                }
+                else{
+                    upperItemsOFn.add(itemsOFn.get(i));
+                }
+            }
+        }
+        else{
+            for(int i = 0; i < itemsOFn.size(); i++){
+                if(i < midpoint){
+                    lowerItemsOFn.add(itemsOFn.get(i));
+                }
+                else if(midpoint == i){}
+                else{
+                    upperItemsOFn.add(itemsOFn.get(i));
+                }
+            }
+        }
+
+        // lower
+        int lowersize = lowerItemsOFn.size();
+        System.out.println(median(lowerItemsOFn, lowersize));
+        // mid
+        int midsize = itemsOFn.size();
+        System.out.println(median(itemsOFn, midsize));
+        // upper
+        int uppersize = upperItemsOFn.size();
+        System.out.println(median(upperItemsOFn, uppersize));
+    }
+
+    private static int median(ArrayList<Integer> arr, int size) {
+        // find and print quartile
+        if (size % 2 == 0) {
+            int temp2 = (size / 2);
+            int temp3 = 0;
+            temp3 = ((arr.get(temp2) + arr.get(temp2 - 1)) / 2);
+            return temp3;
+        } else {
+            int temp4 = ((size - 1) / 2);
+            return arr.get(temp4);
+        }
+    }
+}
