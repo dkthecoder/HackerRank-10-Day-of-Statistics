@@ -12,6 +12,7 @@ public class Solution {
         while(scan.hasNext()){
             itemsOFn.add(scan.nextInt());
         }
+        scan.close();
 
         //get mean
         double mean = 0;
