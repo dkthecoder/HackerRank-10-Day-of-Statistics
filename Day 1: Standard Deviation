@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        ArrayList<Integer> itemsOFn = new ArrayList<Integer>();
+
+        while(scan.hasNext()){
+            itemsOFn.add(scan.nextInt());
+        }
+
+        //get mean
+        double mean = 0;
+        for(int i = 0; i < itemsOFn.size(); i++){
+            mean += itemsOFn.get(i);
+        }
+        mean = mean / n;
+
+        //get variance, square and sum
+        double total = 0;
+        for(int i = 0; i < itemsOFn.size(); i++){
+            double temp = 0;
+            temp = (itemsOFn.get(i) - mean);
+            temp = (temp * temp);
+            total += temp;
+        } 
+
+        //find mean and square root, print result
+        total = Math.sqrt((total / (n)));
+        System.out.println(total);
+    }
+
+}
